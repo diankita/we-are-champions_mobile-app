@@ -1,4 +1,14 @@
-html, body {
-    margin: 0;
-    padding: 0;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #1b1924;
+}
+
+
+
+.hero-img {
+  width: 5.625rem;
+  height: 5.625rem;
+  flex-shrink: 0;
 }
