@@ -1,4 +1,58 @@
-html, body {
-    margin: 0;
-    padding: 0;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #1b1924;
+  font-family: "Inter", sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 360px;
+  margin: 35px auto;
+}
+
+#hero-img {
+  width: 5.625rem;
+  height: 5.625rem;
+  /* flex-shrink: 0; */
+}
+
+#hero-heading {
+  color: #fff;
+  font-size: 1.5625rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+}
+
+#input-field {
+  background: #444059;
+  border-radius: 8px;
+  border: none;
+  height: 7.375rem;
+  color: #8f8f8f;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.8rem;
+  resize: none;
+}
+
+#publish-button {
+  background: #28a9f1;
+  border-radius: 8px;
+  border: none;
+  color: #04131c;
+  text-align: center;
+  font-size: 1.375rem;
+  font-family: Josefin Sans;
+  font-weight: 700;
+  padding: 1rem 1.5rem;
 }
