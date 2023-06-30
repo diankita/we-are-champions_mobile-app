@@ -13,7 +13,7 @@ const endorsementsInDB = ref(database, "endorsements")
 const inputFieldEl = document.querySelector("#input-field");
 const publishButtonEl = document.querySelector("#publish-button");
 const endorsementsListEl = document.querySelector("#endorsements-list");
-// const liEl = document.createElement("li")
+// const pEl = document.createElement("p")
 
 publishButtonEl.addEventListener("click", function() {
   let inputValue = inputFieldEl.value
@@ -42,7 +42,7 @@ function clearEndorsementsListEl() {
 }
 
 function displayEndorsement(value) {
-  endorsementsListEl.innerHTML += `<li>${value}</li>`
-  // liEl.textContent = value;
+  endorsementsListEl.innerHTML += `<p>${value}</p>`
+  // pEl.textContent = value;
   // endorsementsListEl.appendChild(liEl);
 }
