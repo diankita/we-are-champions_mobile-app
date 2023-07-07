@@ -16,21 +16,32 @@ const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const endorsementsInDB = ref(database, "endorsements");
 
-const inputFieldEl = document.querySelector("#input-field");
+const endorsementInputEl = document.querySelector("#endorsement-input");
+const toInputEl = document.querySelector("#to-input");
+const fromInputEl = document.querySelector("#from-input");
+
 const publishButtonEl = document.querySelector("#publish-button");
 const endorsementsListEl = document.querySelector("#endorsements-list");
 
 publishButtonEl.addEventListener("click", function () {
-  let inputValue = inputFieldEl.value;
+  let inputValue = {
+    endorsementInputValue: endorsementInputEl.value,
+    toInputValue: toInputEl.value,
+    fromInputValue: fromInputEl.value,
+  };
+  // let inputValue = endorsementInputEl.value;
+  // let toValue = toInputEl.value;
+
   push(endorsementsInDB, inputValue);
 
-  clearInputFieldEl();
+  clearInputFieldEls();
 });
 
 onValue(endorsementsInDB, function (snapshot) {
   if (snapshot.exists()) {
     let endorsementsArray = Object.entries(snapshot.val());
-
+    console.log(snapshot.val())
+    console.log(endorsementsArray)
     clearEndorsementsListEl();
 
     for (let i = 0; i < endorsementsArray.length; i++) {
@@ -39,14 +50,17 @@ onValue(endorsementsInDB, function (snapshot) {
       let currentEndorsementValue = currentEndorsement[1];
 
       displayEndorsement(currentEndorsement);
+      console.log(currentEndorsementValue.endorsementInputValue)
     }
   } else {
     endorsementsListEl.innerHTML = "No endorsements yet 🙁";
   }
 });
 
-function clearInputFieldEl() {
-  inputFieldEl.value = "";
+function clearInputFieldEls() {
+  endorsementInputEl.value = "";
+  toInputEl.value = "";
+  fromInputEl.value = "";
 }
 
 function clearEndorsementsListEl() {
@@ -55,15 +69,28 @@ function clearEndorsementsListEl() {
 
 function displayEndorsement(item) {
   let itemID = item[0];
-  let itemValue = item[1];
+  let itemValue = item[1].endorsementInputValue;
+  let toValue = item[1].toInputValue;
+  let fromValue = item[1].fromInputValue;
 
   let newEl = document.createElement("p");
-  newEl.textContent = itemValue;
+  // newEl.textContent = itemValue;
+
+  newEl.innerHTML = `
+  <strong>To ${toValue}</strong>
+  <br /> 
+  <br /> 
+  ${itemValue}
+  <br /> 
+  <br /> 
+  <strong>From ${fromValue}</strong>
+  `;
 
   newEl.addEventListener("click", function () {
     let exactLocationOfItemInDB = ref(database, `endorsements/${itemID}`);
 
     remove(exactLocationOfItemInDB);
   });
+
   endorsementsListEl.append(newEl);
 }

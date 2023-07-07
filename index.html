@@ -22,11 +22,17 @@
       <img src="assets/freddie.png" id="hero-img" alt="freddie mercury with his hand up" />
       <h1 id="hero-heading">We are the Champions</h1>
     </div>
-    <div class="input-section">
-      <textarea id="input-field" name="input-field" placeholder="Write your endorsement here" minlength="2"
-        required></textarea>
-      <button id="publish-button">Publish</button>
-    </div>
+    <form>
+      <div class="input-section">
+        <textarea class="input-field" id="endorsement-input" name="input-field"
+          placeholder="Write your endorsement here" rows="7"></textarea>
+        <div class="to-from-section">
+          <input class="input-field to-from-input" id="to-input" type="text" placeholder="To" />
+          <input class="input-field to-from-input" id="from-input" type="text" placeholder="From" />
+        </div>
+        <button id="publish-button" type="submit">Publish</button>
+      
+    </form>
     <div class="endorsements-section">
       <h2 id="endorsements-heading">- Endorsements -</h2>
       <div id="endorsements-list">
