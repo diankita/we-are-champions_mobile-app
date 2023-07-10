@@ -74,6 +74,7 @@ body {
 
 #publish-button:hover {
   background: #61bdee;
+  scale: 1.02; 
 }
 
 #endorsements-heading {

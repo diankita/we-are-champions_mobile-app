@@ -40,8 +40,7 @@ publishButtonEl.addEventListener("click", function () {
 onValue(endorsementsInDB, function (snapshot) {
   if (snapshot.exists()) {
     let endorsementsArray = Object.entries(snapshot.val());
-    console.log(snapshot.val())
-    console.log(endorsementsArray)
+
     clearEndorsementsListEl();
 
     for (let i = 0; i < endorsementsArray.length; i++) {
@@ -50,7 +49,6 @@ onValue(endorsementsInDB, function (snapshot) {
       let currentEndorsementValue = currentEndorsement[1];
 
       displayEndorsement(currentEndorsement);
-      console.log(currentEndorsementValue.endorsementInputValue)
     }
   } else {
     endorsementsListEl.innerHTML = "No endorsements yet 🙁";
