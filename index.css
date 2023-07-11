@@ -51,6 +51,11 @@ body {
   resize: none;
 }
 
+.error-message {
+  background: #96051672;
+  outline: 0.5px solid red;
+}
+
 .to-from-section {
   display: flex;
   flex-direction: row;
@@ -95,13 +100,13 @@ body {
   gap: 0.8rem 0;
 }
 
-p {
+.endorsement-item {
   color: #1b1924;
   font-size: 0.75rem;
   font-family: "Inter", sans-serif;
   background: #fff;
   border-radius: 4px;
-  padding: 0.7rem 0.9rem;
+  padding: 0 0.9rem;
   margin: 0;
   text-align: start;
 }

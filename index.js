@@ -29,9 +29,17 @@ const endorsementsListEl = document.querySelector("#endorsements-list");
 publishButtonEl.addEventListener("click", function () {
   let inputValue = {
     endorsementInputValue: endorsementInputEl.value,
-    toInputValue: toInputEl.value,
-    fromInputValue: fromInputEl.value,
+    toInputValue: toInputEl.value ? toInputEl.value : "Anonymous",
+    fromInputValue: fromInputEl.value ? fromInputEl.value : "Anonymous",
   };
+
+  if (!inputValue.endorsementInputValue) {
+    endorsementInputEl.setAttribute("placeholder", "Endorsement may not be empty");
+    endorsementInputEl.classList.add("error-message");
+
+    console.log(endorsementInputEl.className)
+    return;
+  }
 
   push(endorsementsInDB, inputValue);
 
@@ -60,6 +68,8 @@ onValue(endorsementsInDB, function (snapshot) {
 // Clear elements
 function clearInputFieldEls() {
   endorsementInputEl.value = "";
+  endorsementInputEl.setAttribute("placeholder", "Write your endorsement here");
+  endorsementInputEl.classList.remove("error-message");
   toInputEl.value = "";
   fromInputEl.value = "";
 }
@@ -75,17 +85,26 @@ function displayEndorsement(item) {
   let toValue = item[1].toInputValue;
   let fromValue = item[1].fromInputValue;
 
-  var newEl = document.createElement("p");
+  // var newEl = document.createElement("p");
 
+  // newEl.innerHTML = `
+  // <strong>To ${toValue}</strong>
+  // <br /> 
+  // <br /> 
+  // ${itemValue}
+  // <br /> 
+  // <br /> 
+  // <strong>From ${fromValue}</strong>
+  // `;
+
+  var newEl = document.createElement("div");
+
+  newEl.classList.add("endorsement-item")
   newEl.innerHTML = `
-  <strong>To ${toValue}</strong>
-  <br /> 
-  <br /> 
-  ${itemValue}
-  <br /> 
-  <br /> 
-  <strong>From ${fromValue}</strong>
-  `;
+    <p><strong>To: ${toValue}</strong></p>
+    <p>${itemValue}</p>
+    <p><strong>From: ${fromValue}</strong></p>
+    `;
 
   endorsementsListEl.append(newEl);
 
