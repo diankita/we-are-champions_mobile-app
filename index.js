@@ -34,10 +34,12 @@ publishButtonEl.addEventListener("click", function () {
   };
 
   if (!inputValue.endorsementInputValue) {
-    endorsementInputEl.setAttribute("placeholder", "Endorsement may not be empty");
+    endorsementInputEl.setAttribute(
+      "placeholder",
+      "Endorsement may not be empty"
+    );
     endorsementInputEl.classList.add("error-message");
 
-    console.log(endorsementInputEl.className)
     return;
   }
 
@@ -85,21 +87,9 @@ function displayEndorsement(item) {
   let toValue = item[1].toInputValue;
   let fromValue = item[1].fromInputValue;
 
-  // var newEl = document.createElement("p");
-
-  // newEl.innerHTML = `
-  // <strong>To ${toValue}</strong>
-  // <br /> 
-  // <br /> 
-  // ${itemValue}
-  // <br /> 
-  // <br /> 
-  // <strong>From ${fromValue}</strong>
-  // `;
-
   var newEl = document.createElement("div");
 
-  newEl.classList.add("endorsement-item")
+  newEl.classList.add("endorsement-item");
   newEl.innerHTML = `
     <p><strong>To: ${toValue}</strong></p>
     <p>${itemValue}</p>
@@ -109,15 +99,17 @@ function displayEndorsement(item) {
   endorsementsListEl.append(newEl);
 
   removeEndorsement(itemID, newEl);
-
 }
 
 function removeEndorsement(location, el) {
-
-    el.addEventListener("dblclick", function () {
+  el.addEventListener("dblclick", function () {
+    let confirmation = confirm("Do you with to delete this endorsement?");
+    if (confirmation) {
       let exactLocationOfItemInDB = ref(database, `endorsements/${location}`);
 
       remove(exactLocationOfItemInDB);
-    });
+    } else {
+      return;
+    }
+  });
 }
-
