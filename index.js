@@ -68,15 +68,14 @@ function clearEndorsementsListEl() {
   endorsementsListEl.innerHTML = "";
 }
 
-// Render the entered data in a formatted way
+// Render and remove the entered data
 function displayEndorsement(item) {
   let itemID = item[0];
   let itemValue = item[1].endorsementInputValue;
   let toValue = item[1].toInputValue;
   let fromValue = item[1].fromInputValue;
 
-  let newEl = document.createElement("p");
-  // newEl.textContent = itemValue;
+  var newEl = document.createElement("p");
 
   newEl.innerHTML = `
   <strong>To ${toValue}</strong>
@@ -88,11 +87,18 @@ function displayEndorsement(item) {
   <strong>From ${fromValue}</strong>
   `;
 
-  newEl.addEventListener("dblclick", function () {
-    let exactLocationOfItemInDB = ref(database, `endorsements/${itemID}`);
-
-    remove(exactLocationOfItemInDB);
-  });
-
   endorsementsListEl.append(newEl);
+
+  removeEndorsement(itemID, newEl);
+
 }
+
+function removeEndorsement(location, el) {
+
+    el.addEventListener("dblclick", function () {
+      let exactLocationOfItemInDB = ref(database, `endorsements/${location}`);
+
+      remove(exactLocationOfItemInDB);
+    });
+}
+
