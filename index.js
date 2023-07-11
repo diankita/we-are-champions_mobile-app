@@ -84,7 +84,7 @@ function displayEndorsement(item) {
   <strong>From ${fromValue}</strong>
   `;
 
-  newEl.addEventListener("click", function () {
+  newEl.addEventListener("dblclick", function () {
     let exactLocationOfItemInDB = ref(database, `endorsements/${itemID}`);
 
     remove(exactLocationOfItemInDB);
