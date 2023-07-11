@@ -1,3 +1,4 @@
+// Add firebase database to the project
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import {
   getDatabase,
@@ -16,6 +17,7 @@ const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const endorsementsInDB = ref(database, "endorsements");
 
+// Connect html elements with JS
 const endorsementInputEl = document.querySelector("#endorsement-input");
 const toInputEl = document.querySelector("#to-input");
 const fromInputEl = document.querySelector("#from-input");
@@ -23,20 +25,20 @@ const fromInputEl = document.querySelector("#from-input");
 const publishButtonEl = document.querySelector("#publish-button");
 const endorsementsListEl = document.querySelector("#endorsements-list");
 
+// Push data to the database on click
 publishButtonEl.addEventListener("click", function () {
   let inputValue = {
     endorsementInputValue: endorsementInputEl.value,
     toInputValue: toInputEl.value,
     fromInputValue: fromInputEl.value,
   };
-  // let inputValue = endorsementInputEl.value;
-  // let toValue = toInputEl.value;
 
   push(endorsementsInDB, inputValue);
 
   clearInputFieldEls();
 });
 
+// Evaluate if there are emtries in the database
 onValue(endorsementsInDB, function (snapshot) {
   if (snapshot.exists()) {
     let endorsementsArray = Object.entries(snapshot.val());
@@ -55,6 +57,7 @@ onValue(endorsementsInDB, function (snapshot) {
   }
 });
 
+// Clear elements
 function clearInputFieldEls() {
   endorsementInputEl.value = "";
   toInputEl.value = "";
@@ -65,6 +68,7 @@ function clearEndorsementsListEl() {
   endorsementsListEl.innerHTML = "";
 }
 
+// Render the entered data in a formatted way
 function displayEndorsement(item) {
   let itemID = item[0];
   let itemValue = item[1].endorsementInputValue;
